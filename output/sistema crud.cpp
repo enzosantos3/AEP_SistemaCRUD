@@ -11,7 +11,7 @@ typedef struct {
 } Usuario;
 
 void criptografar(char *texto) {
-    for (int i = 0; i < strlen(texto); i++){
+	    for (int i = 0; i < strlen(texto); i++){
         texto[i] += CHAVE_CRIPTOGRAFIA;
     }
 }
