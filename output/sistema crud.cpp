@@ -1,5 +1,5 @@
-#include <stdio.h>
-#include <string.h>
+#include <stdio.h> //Eai zé
+#include <string.h>//Opa
 #include <stdlib.h>
 
 #define FILENAME "usuarios"
