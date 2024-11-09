@@ -1,5 +1,5 @@
-#include <stdio.h> //Eai zé
-#include <string.h>//Opa
+#include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 
 #define FILENAME "usuarios"
@@ -25,33 +25,33 @@ void descriptografar(char *texto) {
 void adicionar_usuario() {
     FILE *file = fopen(FILENAME, "a");
     if (file == NULL) {
-        printf("Erro ao abrir o arquivo.\n");
+        printf("\033[1;32mErro ao abrir o arquivo.\n");
         return;
     }
     Usuario usuario;
-    printf("Digite o nome do usuario: ");
+    printf("\033[1;32m o nome do usuario: ");
     scanf(" %[^\n]s", usuario.nome);
-    printf("Digite a idade do usuario: ");
+    printf("\033[1;32mDigite a idade do usuario: ");
     scanf("%d", &usuario.idade);
 
     criptografar(usuario.nome);
     fprintf(file, "%s %d\n", usuario.nome, usuario.idade + CHAVE_CRIPTOGRAFIA);
     fclose(file);
-    printf("Usuario adicionado com sucesso!\n");
+    printf("\033[1;32mUsuario adicionado com sucesso!\n");
 }
 
 void listar_usuarios() {
     FILE *file = fopen(FILENAME, "r");
     if (file == NULL) {
-        printf("Nenhum usuario cadastrado.\n");
+        printf("\033[1;32mNenhum usuario cadastrado.\n");
         return;
     }
     Usuario usuario;
-    printf("\nLista de Usuarios:\n");
+    printf("\n\033[1;32mLista de Usuarios:\n");
     while (fscanf(file, "%s %d\n", usuario.nome, &usuario.idade) != EOF) {
         descriptografar(usuario.nome);
         usuario.idade -= CHAVE_CRIPTOGRAFIA;
-        printf("Nome: %s | Idade: %d\n", usuario.nome, usuario.idade);
+        printf("\033[1;32mNome: %s | Idade: %d\n", usuario.nome, usuario.idade);
     }
     fclose(file);
 }
@@ -59,12 +59,12 @@ void listar_usuarios() {
 void atualizar_usuario() {
     FILE *file = fopen(FILENAME, "r+");
     if (file == NULL) {
-        printf("Erro ao abrir o arquivo.\n");
+        printf("\033[1;32mErro ao abrir o arquivo.\n");
         return;
     }
 
     char nome[50];
-    printf("Digite o nome do usuario para atualizar: ");
+    printf("\033[1;32mDigite o nome do usuario para atualizar: ");
     scanf(" %[^\n]s", nome);
 
     int encontrado = 0;
@@ -75,20 +75,20 @@ void atualizar_usuario() {
         descriptografar(usuario.nome);
         if (strcmp(usuario.nome, nome) == 0) {
             encontrado = 1;
-            printf("Digite o novo nome: ");
+            printf("\033[1;32mDigite o novo nome: ");
             scanf(" %[^\n]s", usuario.nome);
-            printf("Digite a nova idade: ");
+            printf("\033[1;32mDigite a nova idade: ");
             scanf("%d", &usuario.idade);
 
             criptografar(usuario.nome);
             fseek(file, pos - strlen(usuario.nome) - 4, SEEK_SET);
             fprintf(file, "%s %d\n", usuario.nome, usuario.idade + CHAVE_CRIPTOGRAFIA);
-            printf("Usuario atualizado com sucesso!\n");
+            printf("\033[1;32mUsuario atualizado com sucesso!\n");
             break;
         }
     }
     if (!encontrado) {
-        printf("Usuario nao encontrado.\n");
+        printf("\033[1;32mUsuario nao encontrado.\n");
     }
     fclose(file);
 }
@@ -96,19 +96,19 @@ void atualizar_usuario() {
 void excluir_usuario() {
     FILE *file = fopen(FILENAME, "r");
     if (file == NULL) {
-        printf("Erro ao abrir o arquivo.\n");
+        printf("\033[1;32mErro ao abrir o arquivo.\n");
         return;
     }
     
     FILE *tempFile = fopen("temp.txt", "w");
     if (tempFile == NULL) {
-        printf("Erro ao criar arquivo temporario.\n");
+        printf("\033[1;32mErro ao criar arquivo temporario.\n");
         fclose(file);
         return;
     }
 
     char nome[50];
-    printf("Digite o nome do usuario para excluir: ");
+    printf("\033[1;32mDigite o nome do usuario para excluir: ");
     scanf(" %[^\n]s", nome);
 
     int encontrado = 0;
@@ -130,9 +130,9 @@ void excluir_usuario() {
     rename("temp.txt", FILENAME);
 
     if (encontrado) {
-        printf("Usuario excluido com sucesso!\n");
+        printf("\033[1;32mUsuario excluido com sucesso!\n");
     } else {
-        printf("Usuario nao encontrado.\n");
+        printf("\033[1;32mUsuario nao encontrado.\n");
     }
 }
 
@@ -140,13 +140,13 @@ int main() {
     int opcao; //parte principal|menu
 
     do {
-        printf("\n---Menu de opcoes---\n");
-        printf("1. Adicionar Usuario\n");
-        printf("2. Listar Usuarios\n");
-        printf("3. Atualizar Usuario\n");
-        printf("4. Excluir Usuario\n");
-        printf("0. Sair\n");
-        printf("Escolha uma opcao: ");
+        printf("\033[1;32m\n---Menu de opcoes---\n");
+        printf("\033[1;32m1. Adicionar Usuario\n");
+        printf("\033[1;32m2. Listar Usuarios\n");
+        printf("\033[1;32m3. Atualizar Usuario\n");
+        printf("\033[1;32m4. Excluir Usuario\n");
+        printf("\033[1;32m5. Sair\n");
+        printf("\033[1;32mEscolha uma opcao: ");
         scanf("%d", &opcao);
 
         switch (opcao) {
@@ -162,11 +162,11 @@ int main() {
             case 4:
                 excluir_usuario();
                 break;
-            case 0:
-                printf("Saindo...\n");
+            case 5:
+                printf("\033[1;32mSaindo...\n");
                 break;
             default:
-                printf("Opcao invalida.\n");
+                printf("\033[1;32mOpcao invalida.\n");
         }
     } while (opcao != 0);
 
