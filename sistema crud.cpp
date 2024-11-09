@@ -1,4 +1,4 @@
-#include <stdio.h>//ola
+#include <stdio.h>//ola ze
 #include <string.h>
 #include <stdlib.h>
 
