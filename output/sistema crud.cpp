@@ -29,7 +29,7 @@ void adicionar_usuario() {
         return;
     }
     Usuario usuario;
-    printf("\033[1;32m o nome do usuario: ");
+    printf("\033[1;32mDigite o nome do usuario: ");
     scanf(" %[^\n]s", usuario.nome);
     printf("\033[1;32mDigite a idade do usuario: ");
     scanf("%d", &usuario.idade);
@@ -137,7 +137,7 @@ void excluir_usuario() {
 }
 
 int main() {
-    int opcao; //parte principal|menu
+    int opcao;
 
     do {
         printf("\033[1;32m\n---Menu de opcoes---\n");
@@ -152,21 +152,26 @@ int main() {
         switch (opcao) {
             case 1:
                 adicionar_usuario();
+                system("cls");
                 break;
             case 2:
                 listar_usuarios();
                 break;
             case 3:
                 atualizar_usuario();
+                system("cls");
                 break;
             case 4:
                 excluir_usuario();
+                system("cls");
                 break;
             case 5:
                 printf("\033[1;32mSaindo...\n");
+                system("cls");
                 break;
             default:
                 printf("\033[1;32mOpcao invalida.\n");
+                system("cls");
         }
     } while (opcao != 0);
 
