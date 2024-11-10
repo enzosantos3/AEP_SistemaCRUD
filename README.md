@@ -1,0 +1,1 @@
+Esse código implementa um sistema simples de gerenciamento de usuários em C, permitindo adicionar, listar, atualizar e excluir informações dos usuários, com dados criptografados para segurança básica.
