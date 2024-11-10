@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <string.h>
+#include <string.h> //pedro gay
 #include <stdlib.h>
 
 #define FILENAME "usuarios"
